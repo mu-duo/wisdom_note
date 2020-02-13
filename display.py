@@ -44,18 +44,32 @@ page_pxy = 0
 
 # input the book_num
 book_num = input(' the book_num=?:')
-with open(home_path + book_num + '/define.txt') as f:
-    page_px_x = int(f.readline())
-    page_px_y = int(f.readline())
-    print(page_px_y,'*',page_px_x)
+while(True):
+    # 尝试找到路径，找不到会提示路径错误
+    try:
+        with open(home_path + book_num + '/define.txt') as f:
+            page_px_x = int(f.readline())
+            page_px_y = int(f.readline())
+            print("书本格式为：", page_px_y, '*', page_px_x)
+        break;
+
+    except FileNotFoundError:
+        book_num = input('again, the book_num=?:')
 
 # open the book
 path = home_path + book_num + '/'
 
 page_num = input('the page_num = ?:')
-
 path_page = path + 'page' + page_num + '.txt'
-file = open(path_page)
+
+while(True):
+    try:
+        file = open(path_page)
+        break;
+    except FileNotFoundError:
+        page_num = input('again, the page_num = ?:')
+        path_page = path + 'page' + page_num + '.txt'
+
 lines = file.readlines()
 
 # judge the page

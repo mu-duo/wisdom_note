@@ -35,7 +35,7 @@ import numpy
 这里设置一下校验位
 '''
 # global set
-home_path = 'c:/wisdom/book_'
+home_path = 'book/book_'
 page_star = 2580
 page_end = 4580
 page_num = 0

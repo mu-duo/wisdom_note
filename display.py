@@ -30,24 +30,15 @@
 # import the modules
 import matplotlib.pyplot
 import numpy
+from define import *
 
-'''
-这里设置一下校验位
-'''
-# global set
-home_path = 'book/book_'
-page_star = 2580
-page_end = 4580
-page_num = 0
-page_px_x = 0
-page_pxy = 0
 
 # input the book_num
 book_num = input(' the book_num=?:')
 while(True):
     # 尝试找到路径，找不到会提示路径错误
     try:
-        with open(home_path + book_num + '/define.txt') as f:
+        with open(home_path +'/book_' + book_num + '/define.txt') as f:
             page_px_x = int(f.readline())
             page_px_y = int(f.readline())
             print("书本格式为：", page_px_y, '*', page_px_x)
@@ -57,7 +48,7 @@ while(True):
         book_num = input('again, the book_num=?:')
 
 # open the book
-path = home_path + book_num + '/'
+path = home_path +'/book_' + book_num + '/'
 
 page_num = input('the page_num = ?:')
 path_page = path + 'page' + page_num + '.txt'
@@ -76,20 +67,23 @@ lines = file.readlines()
 if page_star != int(lines[0]) or page_end != int(lines[-1]):
     print('校验码对不上！！！')
 
-# get all the data
-data = numpy.zeros((page_px_y,page_px_x))
-# get all the data
-for i in lines[1:len(lines) - 2]:
-    data_tem = i.split(' ')
-    y = int(data_tem[0])
-    x = int(data_tem[1])
-    lever = int(data_tem[2])
-    data[y][x] = lever
-    file.close()
+def show_page():
+    # get all the data
+    data = numpy.zeros((page_px_y, page_px_x))
+    # get all the data
+    for i in lines[1:len(lines) - 2]:
+        data_tem = i.split(' ')
+        y = int(data_tem[0])
+        x = int(data_tem[1])
+        lever = int(data_tem[2])
+        data[y][x] = lever
+        file.close()
 
-# show the picture
-matplotlib.pyplot.imshow(data, cmap='Greys', interpolation='None')
-matplotlib.pyplot.show()
+    # show the picture
+    matplotlib.pyplot.imshow(data, cmap='Greys', interpolation='None')
+    matplotlib.pyplot.show()
+
+show_page()
 '''
 已可以显示图片，下一步将图片重叠
 '''

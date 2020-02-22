@@ -1,15 +1,28 @@
 '''
 本模块用于初始化的各种操作
+包含初始路径检查、初始化建立新书本
 '''
 
 from define import *
 import os
 
 def init_home():
+    '''
+    check the defalt var
+    :return:null
+    '''
     if not os.path.exists(home_path):
         os.mkdir(home_path)
+        file = open('book/define.txt','w')
+        file.close()
+
 
 def init_book(book_name = '新建教材'):
+    '''
+    create the new book
+    :param book_name:
+    :return: null
+    '''
     try:
         name = input('请输入文件名：')
         if not name=='':

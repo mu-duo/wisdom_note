@@ -1,5 +1,5 @@
 '''
-本模块用于定义各种全局参数
+本模块用于定义、初始化各种全局参数
 '''
 #家目录
 home_path = 'book'
@@ -15,6 +15,12 @@ page_px_x = '80'
 page_px_y = '80'
 #书本总页码
 book_nums = '50'
+
+with open('book/define.txt') as file:
+    page_px_y = file.readline()
+    page_px_x = file.readline()
+    book_nums = file.readline()
+
 
 #数据集，用于传递信息
 head = [page_px_y,page_px_x,book_nums]

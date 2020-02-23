@@ -32,24 +32,35 @@ import matplotlib.pyplot
 import numpy
 from define import *
 
-def open_book(book_name = ''):
+def open_book(name = ''):
     '''
     cd the path of the book
            ps:it's necessary before running show_page()
-    :param book_name:
+    :param name:
     :return:null
     '''
     global  book_num
-    book_num = input('the book\'s name = ?')
+
+    #get the book_name
+    if name=='':
+        name = input('the book\'s name = ?')
+        if name=='':
+            name = book_num
+
+    book_num = name
+
+
     while (True):
         # 尝试找到路径，找不到会提示路径错误
         try:
             with open(home_path + '/book_' + book_num + '/define.txt') as f:
                 global page_px_y
                 global page_px_x
+                global book_nums
                 page_px_y = f.readline()
                 page_px_x = f.readline()
-                print("书本格式为：", int(page_px_y), '*', int(page_px_x))
+                book_nums = f.readline()
+                print("书本格式为：", int(page_px_y), '*', int(page_px_x),'页数为：',book_nums)
             break;
 
         except FileNotFoundError:
@@ -63,8 +74,9 @@ def show_page():
     global page_num
     # open the book
     path = home_path + '/book_' + book_num + '/'
-    page_num = input('the page_num = ?:')
+    page_num = input('the page_num = ?:(1 to {})'.format(book_nums))
     path_page = path + 'page' + page_num + '.txt'
+    print(path_page)
 
     while (True):
         try:

@@ -5,7 +5,6 @@
 HOME_path = 'book'
 #校验码
 PAGE_start = '2580'
-PAGE_end = '4580'
 
 #书本名及页码
 BOOK_name = 'README'

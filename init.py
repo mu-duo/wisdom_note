@@ -5,6 +5,7 @@
 
 from define import *
 import os
+from display import *
 
 def init_home():
     '''
@@ -65,6 +66,7 @@ class Book():
         #基本参数
         self.name = name
         self.path = path
+        self.page = '0'
         self.size_y = size_y
         self.size_x = size_x
         self.book_nums = book_nums
@@ -88,6 +90,7 @@ class Book():
         print('\t\tname:          ',self.name)
         print('\t\tpath:          ',self.path)
         print('\t\tsize:          ',self.size_y,'*',self.size_x)
+        print('\t\tpage:          ',self.page)
         print('\t\tbook_nums:     ',self.book_nums)
         print('*********************************')
 
@@ -121,9 +124,6 @@ class Book():
         print('已切换到新笔记中')
 
 
-        pass
-
-
     def check_book(self,name = 'README'):
         if name == 'README':
             name = input('input the book\'s name:')
@@ -148,7 +148,8 @@ class Book():
             if page == '':
                 page = '0'
             try:
-                f = open(self.path+'/page{}.txt'.format(page))
+                self.page = page
+                f = open(self.path+'/{}.txt'.format(page))
                 f.close()
                 break
             except FileNotFoundError:
@@ -174,9 +175,13 @@ class Message():
 
 if __name__ == '__main__':
     book = Book()
-    message = Message()
-
-    message()
+    player = Player()
+    book()
+    book.check_book('book_123')
+    book()
+    book.show_page()
+    player.play(book.path,book.page)
+    book()
 
 
 

@@ -125,6 +125,11 @@ class Book():
 
 
     def check_book(self,name = 'README'):
+        '''
+        check out the book in the book list
+        :param name:
+        :return:
+        '''
         if name == 'README':
             name = input('input the book\'s name:')
         while (True):
@@ -142,6 +147,11 @@ class Book():
                 name = input('again,the book\'s name:')
 
     def show_page(self,page = '0'):
+        '''
+        as a API to the player to show the page's content
+        :param page:
+        :return:
+        '''
         if page == '0':
             page = input('input the page\'s num: ')
         while(True):
@@ -159,6 +169,7 @@ class Book():
         这里显示图片
         '''
         print('图片被显示啦')
+        return self.path,self.page
 
 class Message():
     def __init__(self,head = [],data = []):
@@ -179,8 +190,7 @@ if __name__ == '__main__':
     book()
     book.check_book('book_123')
     book()
-    book.show_page()
-    player.play(book.path,book.page)
+    player.play(book.show_page())
     book()
 
 

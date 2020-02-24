@@ -40,15 +40,15 @@ class Player():
     def __call__(self, *args, **kwargs):
         print('this is a player')
 
-    def play(self, path=HOME_path + '/README',page = '0'):
+    def play(self, data = ('README','0')):
         #read the config
-        with open(path+'/config.txt') as f:
+        with open(data[0]+'/config.txt') as f:
             self.size = (int(f.readline()),int(f.readline()))
 
         #read the page
         self.buffer = numpy.zeros(self.size)
         print(self.buffer)
-        with open(path+'/{}.txt'.format(page)) as f:
+        with open(data[0]+'/{}.txt'.format(data[1])) as f:
             f = f.readlines()
             for i in f[1:]:
                 i = i.split(' ')

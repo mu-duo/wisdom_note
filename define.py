@@ -2,7 +2,7 @@
 本模块用于定义、初始化各种全局参数
 '''
 #家目录
-HOME_path = 'book'
+HOME_path_note= 'book'
 #校验码
 PAGE_start = '2580'
 

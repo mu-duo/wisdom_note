@@ -7,6 +7,7 @@ from define import *
 import os
 from display import *
 
+
 def init_home():
     '''
     check the defalt var
@@ -14,11 +15,11 @@ def init_home():
     '''
     if not os.path.exists(home_path):
         os.mkdir(home_path)
-        file = open('book/define.txt','w')
+        file = open('book/define.txt', 'w')
         file.close()
 
 
-def init_book(book_name = '新建教材'):
+def init_book(book_name='新建教材'):
     '''
     create the new book
     :param book_name:
@@ -26,7 +27,7 @@ def init_book(book_name = '新建教材'):
     '''
     try:
         name = input('请输入文件名：')
-        if not name=='':
+        if not name == '':
             book_name = name
         path = home_path + '/book_' + book_name
         os.mkdir(path)
@@ -37,25 +38,29 @@ def init_book(book_name = '新建教材'):
     except FileExistsError:
         print('文件已存在，无法创建')
 
-def get_var(var_name = ''):
+
+def get_var(var_name=''):
     '''
     get a str and return it
     :param var_name:
     :return:
     '''
     var = ''
-    while(True):
+    while (True):
         if var == '':
             var = input('input the var {}:'.format(var_name))
         else:
             break
         return var
 
+
 class Book():
     '''
     create a new book
     '''
-    def __init__(self,name = BOOK_name,path = HOME_path+'/'+BOOK_name,size_y = PAGE_px_y,size_x = PAGE_px_x,book_nums = BOOK_nums):
+
+    def __init__(self, name=BOOK_name, path=HOME_path_note + '/' + BOOK_name, size_y=PAGE_px_y, size_x=PAGE_px_x,
+                 book_nums=BOOK_nums):
         '''
         init the new book
         :param name:
@@ -63,14 +68,14 @@ class Book():
         :param size:
         :param book_nums:
         '''
-        #基本参数
+        # 基本参数
         self.name = name
         self.path = path
         self.page = '0'
         self.size_y = size_y
         self.size_x = size_x
         self.book_nums = book_nums
-        #需要传递的数据
+        # 需要传递的数据
         '''
         self.head = [self.size_y,self.size_x,self.book_nums]
         self.data = []
@@ -87,14 +92,14 @@ class Book():
         print('---------------------------------')
         print('|        all informasion        |')
         print('---------------------------------')
-        print('\t\tname:          ',self.name)
-        print('\t\tpath:          ',self.path)
-        print('\t\tsize:          ',self.size_y,'*',self.size_x)
-        print('\t\tpage:          ',self.page)
-        print('\t\tbook_nums:     ',self.book_nums)
+        print('\t\tname:          ', self.name)
+        print('\t\tpath:          ', self.path)
+        print('\t\tsize:          ', self.size_y, '*', self.size_x)
+        print('\t\tpage:          ', self.page)
+        print('\t\tbook_nums:     ', self.book_nums)
         print('*********************************')
 
-    def create_book(self,name = 'new'):
+    def create_book(self, name='new'):
         '''
         create a new book, and the arg is a string
         :param name:
@@ -104,27 +109,26 @@ class Book():
             name = input('input the book\'s name :')
             if name == '':
                 name = 'new'
-        while(True):
-            if os.path.exists(HOME_path+'/'+name):
+        while (True):
+            if os.path.exists(HOME_path_note + '/' + name):
                 print('the book is already exsists! please input again!')
                 name = input('input the book\'s name :')
             else:
                 self.name = name
-                self.path = HOME_path+'/'+name
+                self.path = HOME_path_note + '/' + name
                 self.size_y = get_var('the size of y')
                 self.size_x = get_var('the size of x')
                 self.book_nums = get_var('the book_nums')
                 os.mkdir(self.path)
-                with open(self.path+'/config.txt','w') as f:
-                    f.write(self.size_y+'\n')
-                    f.write(self.size_x+'\n')
-                    f.write(self.book_nums+'\n')
+                with open(self.path + '/config.txt', 'w') as f:
+                    f.write(self.size_y + '\n')
+                    f.write(self.size_x + '\n')
+                    f.write(self.book_nums + '\n')
                 print('已创立新笔记！')
                 break
         print('已切换到新笔记中')
 
-
-    def check_book(self,name = 'README'):
+    def check_book(self, name='README'):
         '''
         check out the book in the book list
         :param name:
@@ -135,7 +139,7 @@ class Book():
         while (True):
             if name == '':
                 name = 'README'
-            self.path = HOME_path + '/' + name
+            self.path = HOME_path_note + '/' + name
             try:
                 with open(self.path + '/config.txt') as f:
                     self.size_y = f.readline().strip('\n')
@@ -146,7 +150,7 @@ class Book():
                 print('the book isn\'t exsit!')
                 name = input('again,the book\'s name:')
 
-    def show_page(self,page = '0'):
+    def show_page(self, page='0'):
         '''
         as a API to the player to show the page's content
         :param page:
@@ -154,12 +158,12 @@ class Book():
         '''
         if page == '0':
             page = input('input the page\'s num: ')
-        while(True):
+        while (True):
             if page == '':
                 page = '0'
             try:
                 self.page = page
-                f = open(self.path+'/{}.txt'.format(page))
+                f = open(self.path + '/{}.txt'.format(page))
                 f.close()
                 break
             except FileNotFoundError:
@@ -169,10 +173,11 @@ class Book():
         这里显示图片
         '''
         print('图片被显示啦')
-        return self.path,self.page
+        return self.path, self.page
+
 
 class Message():
-    def __init__(self,head = [],data = []):
+    def __init__(self, head=[], data=[]):
         self.head = head
         self.data = data
 
@@ -184,6 +189,7 @@ class Message():
         print('\t\tpath:          ', self.data)
         print('*********************************')
 
+
 if __name__ == '__main__':
     book = Book()
     player = Player()
@@ -192,6 +198,3 @@ if __name__ == '__main__':
     book()
     player.play(book.show_page())
     book()
-
-
-

@@ -15,21 +15,21 @@ def init_home():
     '''
     if not os.path.exists(home_path):
         os.mkdir(home_path)
-        file = open('book/define.txt', 'w')
+        file = open('note/define.txt', 'w')
         file.close()
 
 
-def init_book(book_name='新建教材'):
+def init_note(note_name='新建教材'):
     '''
-    create the new book
-    :param book_name:
+    create the new note
+    :param note_name:
     :return: null
     '''
     try:
         name = input('请输入文件名：')
         if not name == '':
-            book_name = name
-        path = home_path + '/book_' + book_name
+            note_name = name
+        path = home_path + '/note_' + note_name
         os.mkdir(path)
         file = open(path + '/define.txt', mode='w')
         for i in message['head']:
@@ -54,19 +54,19 @@ def get_var(var_name=''):
         return var
 
 
-class Book():
+class Note():
     '''
-    create a new book
+    create a new note
     '''
 
-    def __init__(self, name=BOOK_name, path=HOME_path_note + '/' + BOOK_name, size_y=PAGE_px_y, size_x=PAGE_px_x,
-                 book_nums=BOOK_nums):
+    def __init__(self, name=NOTE_name, path=HOME_path_note + '/' + NOTE_name, size_y=PAGE_px_y, size_x=PAGE_px_x,
+                 note_nums=NOTE_nums):
         '''
-        init the new book
+        init the new note
         :param name:
         :param path:
         :param size:
-        :param book_nums:
+        :param note_nums:
         '''
         # 基本参数
         self.name = name
@@ -74,17 +74,17 @@ class Book():
         self.page = '0'
         self.size_y = size_y
         self.size_x = size_x
-        self.book_nums = book_nums
+        self.note_nums = note_nums
         # 需要传递的数据
         '''
-        self.head = [self.size_y,self.size_x,self.book_nums]
+        self.head = [self.size_y,self.size_x,self.note_nums]
         self.data = []
         self.message = {'head':self.head,'data':self.data}
         '''
 
     def __call__(self, *args, **kwargs):
         '''
-        show the info about the book
+        show the info about the note
         :param args:
         :param kwargs:
         :return:
@@ -96,46 +96,46 @@ class Book():
         print('\t\tpath:          ', self.path)
         print('\t\tsize:          ', self.size_y, '*', self.size_x)
         print('\t\tpage:          ', self.page)
-        print('\t\tbook_nums:     ', self.book_nums)
+        print('\t\tnote_nums:     ', self.note_nums)
         print('*********************************')
 
-    def create_book(self, name='new'):
+    def create_note(self, name='new'):
         '''
-        create a new book, and the arg is a string
+        create a new note, and the arg is a string
         :param name:
         :return:
         '''
         if name == 'new':
-            name = input('input the book\'s name :')
+            name = input('input the note\'s name :')
             if name == '':
                 name = 'new'
         while (True):
             if os.path.exists(HOME_path_note + '/' + name):
-                print('the book is already exsists! please input again!')
-                name = input('input the book\'s name :')
+                print('the note is already exsists! please input again!')
+                name = input('input the note\'s name :')
             else:
                 self.name = name
                 self.path = HOME_path_note + '/' + name
                 self.size_y = get_var('the size of y')
                 self.size_x = get_var('the size of x')
-                self.book_nums = get_var('the book_nums')
+                self.note_nums = get_var('the note_nums')
                 os.mkdir(self.path)
                 with open(self.path + '/config.txt', 'w') as f:
                     f.write(self.size_y + '\n')
                     f.write(self.size_x + '\n')
-                    f.write(self.book_nums + '\n')
+                    f.write(self.note_nums + '\n')
                 print('已创立新笔记！')
                 break
         print('已切换到新笔记中')
 
-    def check_book(self, name='README'):
+    def check_note(self, name='README'):
         '''
-        check out the book in the book list
+        check out the note in the note list
         :param name:
         :return:
         '''
         if name == 'README':
-            name = input('input the book\'s name:')
+            name = input('input the note\'s name:')
         while (True):
             if name == '':
                 name = 'README'
@@ -144,11 +144,11 @@ class Book():
                 with open(self.path + '/config.txt') as f:
                     self.size_y = f.readline().strip('\n')
                     self.size_x = f.readline().strip('\n')
-                    self.book_nums = f.readline().strip('\n')
+                    self.note_nums = f.readline().strip('\n')
                 break
             except FileNotFoundError:
-                print('the book isn\'t exsit!')
-                name = input('again,the book\'s name:')
+                print('the note isn\'t exsit!')
+                name = input('again,the note\'s name:')
 
     def show_page(self, page='0'):
         '''
@@ -191,10 +191,10 @@ class Message():
 
 
 if __name__ == '__main__':
-    book = Book()
+    note = Note()
     player = Player()
-    book()
-    book.check_book('book_123')
-    book()
-    player.play(book.show_page())
-    book()
+    note()
+    note.check_note('1')
+    note()
+    player.play(note.show_page())
+    note()

@@ -1,29 +1,40 @@
 '''
 本模块用于定义、初始化各种全局参数
 '''
-#家目录
-HOME_path_note= 'book'
+import os
+
+
+#笔记的家目录
+HOME_path_note= 'note'
 #校验码
 PAGE_start = '2580'
 
-#书本名及页码
-BOOK_name = 'README'
+#笔记名及页码
+NOTE_name = 'README'
 PAGE_num = '0'
 #纸张尺寸
 PAGE_px_x = '80'
 PAGE_px_y = '80'
-#书本总页码
-BOOK_nums = '50'
-
-with open('book/define.txt') as file:
-    page_px_y = file.readline()
-    page_px_x = file.readline()
-    book_nums = file.readline()
+#笔记总页码
+NOTE_nums = '50'
 
 
-#数据集，用于传递信息
-head = [page_px_y,page_px_x,book_nums]
-for i in range(len(head)-1):
-    head[i]=head[i].strip('\n')
-data = []
-message = {'head':head,'data':data}
+'''
+初始化操作，检查路径是否存在
+'''
+try:
+    with open('note/define.txt','r') as file:
+        page_px_y = file.readline().strip('\n')
+        page_px_x = file.readline().strip('\n')
+        note_nums = file.readline().strip('\n')
+except FileNotFoundError:
+    if not os.path.exists('note'):
+        os.mkdir('note')
+    with open('note/define.txt', 'w+') as file:
+        file.write('800\n')
+        file.write('600\n')
+        file.write('50\n')
+        page_px_y = file.readline().strip('\n')
+        page_px_x = file.readline().strip('\n')
+        note_nums = file.readline().strip('\n')
+

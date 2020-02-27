@@ -177,11 +177,21 @@ class Note():
 
 
 class Message():
+    '''
+    类 ： 信息
+    传递数据的载体，分为头部信息-（head）、数据信息-（data）
+    '''
     def __init__(self, head=[], data=[]):
         self.head = head
         self.data = data
 
     def __call__(self, *args, **kwargs):
+        '''
+        显示该实例的内容
+        :param args:
+        :param kwargs:
+        :return: null
+        '''
         print('---------------------------------')
         print('|        all informasion        |')
         print('---------------------------------')

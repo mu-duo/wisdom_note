@@ -3,7 +3,8 @@ class Note():
     create a new note
     '''
 
-    def __init__(self, size=('80', '80'), page='0'):
+    def __init__(self, target = '', size={'y':'80','x':'80'}, page='0'):
+        self.target = target
         self.size = size
         self.page = page
         self.data = []
@@ -11,6 +12,7 @@ class Note():
 
     def __call__(self):
         print('--------------------note--------------------------')
+        print('     target       :      ',self.target)
         print('     size         :      ', self.size)
         print('     page         :      ', self.page)
         print('     data         :      ', self.data)
@@ -25,6 +27,7 @@ class Note():
     def get_message(self, message):
         self.size = message['head']['size']
         self.page = message['head']['page']
+        self.target = message['head']['target']
         self.data = message['data']
         pass
 
@@ -33,6 +36,7 @@ class Note():
         message['head'] = {}
         message['head']['size'] = self.size
         message['head']['page'] = self.page
+        message['head']['target'] = self.target
         message['data'] = self.data
         return message
 
@@ -41,7 +45,8 @@ if __name__ == '__main__':
     mes ={
         'head':
             {
-                'size': ('80', '50'),
+                'target':'book/book_123',
+                'size': {'y':'80', 'x':'50'},
                 'page': '25'
             },
         'data':

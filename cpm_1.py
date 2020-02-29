@@ -2,36 +2,32 @@ class Cpm():
     '''
     中央处理模块
     '''
-    def __init__(self, work_path='', flush_time=0, home = 'book'):
+    def __init__(self, work_path='', flush_time=1, home = 'book'):
         '''
         :param work_path: 工作路径
         :param flush_time:  刷新间隔
         '''
-        # set the home psth
+        # set the home path
         self.home = home + '/'
         # the abs path
         self.work_path = self.home + work_path
-        # flush tehe buffer
+        # flush the buffer
         self.flush_time = flush_time
         # data and head
         self.message = {'head':{}, 'data':[]}
 
     def __call__(self, *args, **kwargs):
-        print('-------the info of cpm-------\n')
+        print('------------------------cpm------------------------')
         print('work path     :      ',self.work_path)
         print('flush time    :      ',self.flush_time)
         print('message head  :      ',self.message['head'])
         print('message data  :      ',self.message['data'])
+        print('------------------------enf-------------------------')
 
     def __repr__(self):
-        print('this is a repr()')
+        print('\n\n--------------------调试信息----------------------')
         self.__call__()
-        return 'repr end'
-
-    def __str__(self):
-        print('this is a str()')
-        self.__call__()
-        return 'str end'
+        return '---------------------repr-------------------------\n\n'
 
     def get_message(self,message):
         '''
@@ -49,7 +45,7 @@ class Cpm():
         '''
         return self.message
 
-    def check_out(self,book_name):
+    def check_out(self,book_name = 'defualt'):
         '''
         切换工作路径
         :param book_name: 工作的路径

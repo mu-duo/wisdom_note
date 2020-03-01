@@ -45,7 +45,7 @@ class Cpm():
         '''
         return self.message
 
-    def check_out(self,book_name = 'defualt'):
+    def check_out(self, book_name='default'):
         '''
         切换工作路径
         :param book_name: 工作的路径

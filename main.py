@@ -25,6 +25,20 @@ class Wisdom_note():
         self.cpm.check_out(book_name)
         self.load()
 
+    def create_new_book(self, book_name=''):
+        pass
+
+    def create_new_note(self, note_name=''):
+        pass
+
+    def del_note(self, note_name=''):
+        pass
+
+    def del_book(self,book_name=''):
+        pass
+
+    def copy_note(self, note_name='0'):
+
 
 
 if __name__ == '__main__':

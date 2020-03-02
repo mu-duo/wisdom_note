@@ -2,7 +2,7 @@ class Cpm():
     '''
     中央处理模块
     '''
-    def __init__(self, work_path='', flush_time=1, home = 'book'):
+    def __init__(self, work_path='book_123', flush_time=1, home = 'book'):
         '''
         :param work_path: 工作路径
         :param flush_time:  刷新间隔
@@ -53,6 +53,15 @@ class Cpm():
         '''
         self.work_path = self.home + book_name
         pass
+
+    def load(self):
+        with open(self.work_path + '/config.wis') as f:
+            self.message['head']['size'] = {}
+            self.message['head']['path'] = self.work_path
+            self.message['head']['size']['y'] = f.readline().strip('\n')
+            self.message['head']['size']['x'] = f.readline().strip('\n')
+            self.message['head']['page'] = f.readline().strip('\n')
+        print('加载完毕')
 
 if __name__ == '__main__':
     cpm = Cpm()

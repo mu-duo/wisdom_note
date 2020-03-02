@@ -3,12 +3,12 @@ class Note():
     create a new note
     '''
 
-    def __init__(self, size={'y':'80','x':'80'}, page='0', target='book'):
-        # 目标教材路径
-        self.target = target
+    def __init__(self, size={'y': '80', 'x': '80'}, page='0', path='book/book_123'):
+        # 工作路径
+        self.path = path + '/note'
         # 目标教材规格
         self.size = size
-        #上次 停留页码
+        # 上次 停留页码
         self.page = page
         # 数据缓冲区
         self.data = []
@@ -16,7 +16,7 @@ class Note():
 
     def __call__(self):
         print('--------------------note--------------------------')
-        print('     target       :      ',self.target)
+        print('     path         :      ', self.path)
         print('     size         :      ', self.size)
         print('     page         :      ', self.page)
         print('     data         :      ', self.data)
@@ -31,26 +31,25 @@ class Note():
     def get_message(self, message):
         self.size = message['head']['size']
         self.page = message['head']['page']
-        self.target = message['head']['target']
+        self.path = message['head']['path']
         self.data = message['data']
         pass
 
     def send_message(self):
-        message = {}
-        message['head'] = {}
+        message = {'head':{},'data':[]}
         message['head']['size'] = self.size
         message['head']['page'] = self.page
-        message['head']['target'] = self.target
+        message['head']['path'] = self.path
         message['data'] = self.data
         return message
 
 
 if __name__ == '__main__':
-    mes ={
+    mes = {
         'head':
             {
-                'target':'book/book_123',
-                'size': {'y':'80', 'x':'50'},
+                'path': 'book/book_123',
+                'size': {'y': '80', 'x': '50'},
                 'page': '25'
             },
         'data':
@@ -58,7 +57,7 @@ if __name__ == '__main__':
                 [20, 40, 60],
                 [80, 54, 75]
             ]
-        }
+    }
     note = Note()
     print(note)
     note.get_message(mes)
